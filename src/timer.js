@@ -1,5 +1,5 @@
-const timeCurrentElement = document.getElementById("time-current")
 const timeTimerElement = document.getElementById("time-timer")
+const timeCurrentElement = document.getElementById("time-current")
 const btnStart = document.getElementById("btn-start")
 const btnStop = document.getElementById("btn-stop")
 const btnPause = document.getElementById("btn-pause")
@@ -7,6 +7,25 @@ const btnBreak5 = document.getElementById("btn-break-5")
 const btnBreak10 = document.getElementById("btn-break-10")
 const btnBreak30 = document.getElementById("btn-break-30")
 const background = document.getElementById("background")
+
+
+// background functions
+const setBackgroundToBreak = () => {
+    background.classList.remove("onIdle")
+    background.classList.remove("onWork")
+    background.classList.add("onBreak")
+}
+const setBackgroundToWork = () => {
+    background.classList.remove("onIdle")
+    background.classList.remove("onBreak")
+    background.classList.add("onWork")
+}
+const setBackgroundToIdle = () => {
+    background.classList.remove("onBreak")
+    background.classList.remove("onWork")
+    background.classList.add("onIdle")
+}
+
 
 //set up the display state of buttons
 btnStop.classList.add("hidden");
@@ -16,10 +35,6 @@ btnPause.classList.add("hidden");
 const setTimeCurrent = () => {
     timeCurrent = new Date();
     timeCurrentElement.innerText = timeCurrent.toLocaleTimeString();
-    console.log("Break:", onBreak)
-    console.log("Work:", onWork)
-    console.log("Idle:", onIdle)
-
 };
 
 const setTimeTimmer = () => {
@@ -38,6 +53,7 @@ const startTimer = (duration) => {
     btnStart.classList.add("hidden");
     btnPause.classList.remove("hidden");
     btnStop.classList.remove("hidden");
+    setBackgroundToWork();
 }
 
 const stopTimer = () => {
@@ -48,9 +64,7 @@ const stopTimer = () => {
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
     btnPause.innerText = "Pause";
-    background.style.background = "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #17997b)"
-    background.style.backgroundSize = "400% 400%"
-    background.style.animation = "gradient 15s ease infinite"
+    setBackgroundToIdle();
 }
 
 const pauseTimer = () => {
@@ -86,20 +100,27 @@ btnStop.addEventListener("click", stopTimer)
 btnPause.addEventListener("click", pauseTimer)
 btnBreak5.addEventListener("click", () => {
     stopTimer();
-    startTimer(5)
+    startTimer(5);
+    setBackgroundToBreak();
 })
 btnBreak10.addEventListener("click", () => {
     stopTimer();
     startTimer(10)
+    setBackgroundToBreak();
+
 })
 btnBreak30.addEventListener("click", () => {
     stopTimer();
     startTimer(30)
+    setBackgroundToBreak();
+
 })
 
 //set the current time
 let timeCurrent;
 setTimeCurrent();
+setBackgroundToIdle();
+
 
 //start the time current interval
 const timeCurrentInterval = setInterval(setTimeCurrent, 1000)
@@ -117,7 +138,3 @@ timeTimer.setSeconds(0);
 //tracking paused time
 let timeAtPaused
 
-//backgrounds
-let onBreak = false;
-let onWork = false;
-let onIdle = true;

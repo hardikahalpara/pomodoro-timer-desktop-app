@@ -1,8 +1,3 @@
-html {
-    background: linear-gradient(-45deg, #FF6200, #FD7F2C, #FD9346, #FDA766);
-    background-size: 500% 500%;
-    animation: gradient 7s ease infinite;
-  }
   body {
     color: white;
   }
@@ -16,4 +11,26 @@ html {
     100% {
       background-position: 0% 50%;
     }
+  }
+
+
+  .hidden{
+    display: none;
+}
+
+.onIdle{
+    background: linear-gradient(-45deg, #FF6200, #FD7F2C, #FD9346, #FDA766);
+    background-size: 500% 500%;
+    animation: gradient 7s ease infinite;
+  }
+
+  .onBreak{
+    background: linear-gradient(-45deg, #2EB62C, #57C84D, #83D475, #ABE098);
+    background-size: 500% 500%;
+    animation: gradient 7s ease infinite;
+  }
+  .onWork{
+    background: linear-gradient(-45deg, #DC1C13, #EA4C46, #F07470, #F1959B);
+    background-size: 500% 500%;
+    animation: gradient 7s ease infinite;
   }
