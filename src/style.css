@@ -1,6 +1,19 @@
-body{
-    background: #fff;
-}
-.hidden{
-    display: none;
-}
+html {
+    background: linear-gradient(-45deg, #FF6200, #FD7F2C, #FD9346, #FDA766);
+    background-size: 500% 500%;
+    animation: gradient 7s ease infinite;
+  }
+  body {
+    color: white;
+  }
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

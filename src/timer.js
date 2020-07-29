@@ -6,6 +6,7 @@ const btnPause = document.getElementById("btn-pause")
 const btnBreak5 = document.getElementById("btn-break-5")
 const btnBreak10 = document.getElementById("btn-break-10")
 const btnBreak30 = document.getElementById("btn-break-30")
+const background = document.getElementById("background")
 
 //set up the display state of buttons
 btnStop.classList.add("hidden");
@@ -15,6 +16,10 @@ btnPause.classList.add("hidden");
 const setTimeCurrent = () => {
     timeCurrent = new Date();
     timeCurrentElement.innerText = timeCurrent.toLocaleTimeString();
+    console.log("Break:", onBreak)
+    console.log("Work:", onWork)
+    console.log("Idle:", onIdle)
+
 };
 
 const setTimeTimmer = () => {
@@ -43,6 +48,9 @@ const stopTimer = () => {
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
     btnPause.innerText = "Pause";
+    background.style.background = "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #17997b)"
+    background.style.backgroundSize = "400% 400%"
+    background.style.animation = "gradient 15s ease infinite"
 }
 
 const pauseTimer = () => {
@@ -108,3 +116,8 @@ timeTimer.setSeconds(0);
 
 //tracking paused time
 let timeAtPaused
+
+//backgrounds
+let onBreak = false;
+let onWork = false;
+let onIdle = true;
