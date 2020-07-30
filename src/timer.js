@@ -101,7 +101,6 @@ onTimerEnd = () => {
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
     setBackgroundToIdle();
-
 };
 
 
