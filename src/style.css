@@ -45,7 +45,7 @@
     transform: translateY(-4px);
   }
   .pause:hover {
-    background-color: #a8840c;
+    background-color: #c99d0c;
     color: #fff;
     transform: translateY(-4px);
   }
@@ -101,6 +101,7 @@
   align-items: center;
   justify-content: center;
   font-family: 'clock';
+  text-align: center;
 }
 .button-container{
   font-family: 'Roboto', sans-serif;

@@ -10,6 +10,7 @@ const btnBreak30 = document.getElementById("btn-break-30")
 const background = document.getElementById("background")
 const btnMin = document.getElementById("minimize")
 const btnClose = document.getElementById("close")
+const timerStatus = document.getElementById("timer-status")
 
 
 // background updation functions
@@ -60,6 +61,7 @@ const startTimer = (duration) => {
     btnPause.classList.remove("hidden");
     btnStop.classList.remove("hidden");
     setBackgroundToWork();
+    timerStatus.innerText = "Work"
 }
 
 
@@ -73,6 +75,7 @@ const stopTimer = () => {
     btnStart.classList.remove("hidden");
     btnPause.innerText = "Pause";
     setBackgroundToIdle();
+    timerStatus.innerText = "Idle"
 }
 
 //function to pause timer
@@ -101,6 +104,7 @@ onTimerEnd = () => {
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
     setBackgroundToIdle();
+    timerStatus.innerText = "Idle"
 };
 
 
@@ -114,17 +118,20 @@ btnBreak5.addEventListener("click", () => {
     stopTimer();
     startTimer(1);
     setBackgroundToBreak();
+    timerStatus.innerText = "Break"
+
 })
 btnBreak10.addEventListener("click", () => {
     stopTimer();
     startTimer(1);
     setBackgroundToBreak();
-
+    timerStatus.innerText = "Break"
 })
 btnBreak30.addEventListener("click", () => {
     stopTimer();
     startTimer(1);
     setBackgroundToBreak();
+    timerStatus.innerText = "Break"
 })
 btnMin.addEventListener("click", (e) => {
     var window = BrowserWindow.getFocusedWindow();
@@ -143,7 +150,7 @@ btnClose.addEventListener("click", (e) => {
 let timeCurrent;
 setCurrentTime();
 setBackgroundToIdle();
-
+timerStatus.innerText = "Idle";
 
 //start the time current interval
 const currentTimeInterval = setInterval(setCurrentTime, 1000)
