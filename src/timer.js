@@ -1,4 +1,5 @@
 const { BrowserWindow } = require('electron').remote;
+const notifier = require('node-notifier');
 const timerElement = document.getElementById("time-timer")
 const currentTimeElement = document.getElementById("time-current")
 const btnStart = document.getElementById("btn-start")
@@ -98,8 +99,9 @@ const pauseTimer = () => {
 
 // function to manage timer end event
 onTimerEnd = () => {
-    const sound = new Audio("alarm.mp3");
-    sound.play();
+    // const sound = new Audio("alarm.mp3");
+    // sound.play();
+    notifier.notify('Time up!!')
     btnStop.classList.add("hidden");
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
