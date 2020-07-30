@@ -43,21 +43,21 @@ const setCurrentTime = () => {
 };
 
 // function to set timer
-const setTimerTime = () => {
+const setTimerTime = (status) => {
     timeRemaining = new Date(targetTime - timeCurrent).toISOString().substr(11, 8);
     timerElement.innerText = timeRemaining
     if (timeRemaining === "00:00:00") {
-        onTimerEnd();
+        onTimerEnd(status);
         clearInterval(timerInterval);
     }
 };
 
 
 // function to start timer
-const startTimer = (duration) => {
+const startTimer = (duration, status) => {
     targetTime = new Date();
     targetTime.setMinutes(targetTime.getMinutes() + duration);
-    timerInterval = setInterval(setTimerTime, 1000);
+    timerInterval = setInterval(() => setTimerTime(status), 1000);
     btnStart.classList.add("hidden");
     btnPause.classList.remove("hidden");
     btnStop.classList.remove("hidden");
@@ -98,10 +98,14 @@ const pauseTimer = () => {
 
 
 // function to manage timer end event
-onTimerEnd = () => {
+onTimerEnd = (status) => {
     // const sound = new Audio("alarm.mp3");
     // sound.play();
-    notifier.notify('Time up!!')
+    notifier.notify({
+        title: 'Timer',
+        message: `${status} time up!!`,
+        icon: __dirname + 'logo.png'
+    })
     btnStop.classList.add("hidden");
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
@@ -112,26 +116,26 @@ onTimerEnd = () => {
 
 // button click listeners
 btnStart.addEventListener("click", () => {
-    startTimer(1)
+    startTimer(25, 'Work')
 })
 btnStop.addEventListener("click", stopTimer)
 btnPause.addEventListener("click", pauseTimer)
 btnBreak5.addEventListener("click", () => {
     stopTimer();
-    startTimer(1);
+    startTimer(5, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 
 })
 btnBreak10.addEventListener("click", () => {
     stopTimer();
-    startTimer(1);
+    startTimer(10, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
 btnBreak30.addEventListener("click", () => {
     stopTimer();
-    startTimer(1);
+    startTimer(30, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
