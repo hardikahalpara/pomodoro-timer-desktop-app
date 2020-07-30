@@ -7,22 +7,29 @@
 
 <body>
     <div class="grid-container">
-        <div class="grid-item  center">
+        <div class="grid-item  timer">
             <h2 id="time-current"></h2>
         </div>
-        <div class="grid-item center">
+        <div class="grid-item timer">
             <h2 id="time-timer">00:00:00</h2>
         </div>
-        <div class="grid-item">
+        <div class="grid-item button-container">
+            Timer
+            <br />
             <button class="start" id="btn-start">Start</button>
             <button class="stop" id="btn-stop">Stop</button>
             <button class="pause" id="btn-pause">Pause</button>
-            <button class="break" id="btn-break-5">5 mins</button>
-            <button class="break" id="btn-break-10">10 mins</button>
-            <button class="break" id="btn-break-30">30 mins</button>
-
-            <button id="minimize">Minimize</button>
-            <button id="close">Close</button>
+            <br />
+            <br />
+            break (mins)
+            <br />
+            <button class="break" id="btn-break-5">5</button>
+            <button class="break" id="btn-break-10">10</button>
+            <button class="break" id="btn-break-30">30</button>
+            <div class="window-button-container">
+                <button class="window-button min" id="minimize"></button>
+                <button class="window-button close" id="close"></button>
+            </div>
         </div>
     </div>
     <script src="timer.js"></script>
