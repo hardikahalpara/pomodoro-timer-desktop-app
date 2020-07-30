@@ -1,5 +1,10 @@
   body {
     color: white;
+    -webkit-user-select: none;
+  -webkit-app-region: drag;
+  }
+  button {
+    -webkit-app-region: no-drag;
   }
   @keyframes gradient {
     0% {

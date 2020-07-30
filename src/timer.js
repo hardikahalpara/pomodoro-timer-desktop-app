@@ -1,5 +1,6 @@
-const timeTimerElement = document.getElementById("time-timer")
-const timeCurrentElement = document.getElementById("time-current")
+const { BrowserWindow } = require('electron').remote;
+const timerElement = document.getElementById("time-timer")
+const currentTimeElement = document.getElementById("time-current")
 const btnStart = document.getElementById("btn-start")
 const btnStop = document.getElementById("btn-stop")
 const btnPause = document.getElementById("btn-pause")
@@ -7,9 +8,11 @@ const btnBreak5 = document.getElementById("btn-break-5")
 const btnBreak10 = document.getElementById("btn-break-10")
 const btnBreak30 = document.getElementById("btn-break-30")
 const background = document.getElementById("background")
+const btnMin = document.getElementById("minimize")
+const btnClose = document.getElementById("close")
 
 
-// background functions
+// background updation functions
 const setBackgroundToBreak = () => {
     background.classList.remove("onIdle")
     background.classList.remove("onWork")
@@ -31,35 +34,40 @@ const setBackgroundToIdle = () => {
 btnStop.classList.add("hidden");
 btnPause.classList.add("hidden");
 
-
-const setTimeCurrent = () => {
+// function to update current time
+const setCurrentTime = () => {
     timeCurrent = new Date();
-    timeCurrentElement.innerText = timeCurrent.toLocaleTimeString();
+    currentTimeElement.innerText = timeCurrent.toLocaleTimeString();
 };
 
-const setTimeTimmer = () => {
+// function to set timer
+const setTimerTime = () => {
     timeRemaining = new Date(targetTime - timeCurrent).toISOString().substr(11, 8);
-    timeTimerElement.innerText = timeRemaining
+    timerElement.innerText = timeRemaining
     if (timeRemaining === "00:00:00") {
         onTimerEnd();
-        clearInterval(timeTimerInterval);
+        clearInterval(timerInterval);
     }
 };
 
+
+// function to start timer
 const startTimer = (duration) => {
     targetTime = new Date();
     targetTime.setMinutes(targetTime.getMinutes() + duration);
-    timeTimerInterval = setInterval(setTimeTimmer, 1000);
+    timerInterval = setInterval(setTimerTime, 1000);
     btnStart.classList.add("hidden");
     btnPause.classList.remove("hidden");
     btnStop.classList.remove("hidden");
     setBackgroundToWork();
 }
 
+
+//function to stop timer
 const stopTimer = () => {
-    timeTimerElement.innerText = "00:00:00"
-    clearInterval(timeTimerInterval);
-    timeTimerInterval = undefined;
+    timerElement.innerText = "00:00:00"
+    clearInterval(timerInterval);
+    timerInterval = undefined;
     btnStop.classList.add("hidden");
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
@@ -67,10 +75,11 @@ const stopTimer = () => {
     setBackgroundToIdle();
 }
 
+//function to pause timer
 const pauseTimer = () => {
-    if (timeTimerInterval) {
-        clearInterval(timeTimerInterval);
-        timeTimerInterval = undefined;
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = undefined;
         timeAtPaused = new Date();
         btnPause.innerText = "Resume";
     }
@@ -78,21 +87,25 @@ const pauseTimer = () => {
         const curTime = new Date();
         const timeBetween = curTime - timeAtPaused;
         targetTime.setMilliseconds(targetTime.getMilliseconds() + timeBetween)
-        timeTimerInterval = setInterval(setTimeTimmer, 1000)
+        timerInterval = setInterval(setTimerTime, 1000)
         btnPause.innerText = "Pause";
     }
 }
 
 
-
+// function to manage timer end event
 onTimerEnd = () => {
     const sound = new Audio("alarm.mp3");
     sound.play();
     btnStop.classList.add("hidden");
     btnPause.classList.add("hidden");
     btnStart.classList.remove("hidden");
+    setBackgroundToIdle();
+
 };
 
+
+// button click listeners
 btnStart.addEventListener("click", () => {
     startTimer(1)
 })
@@ -100,41 +113,47 @@ btnStop.addEventListener("click", stopTimer)
 btnPause.addEventListener("click", pauseTimer)
 btnBreak5.addEventListener("click", () => {
     stopTimer();
-    startTimer(5);
+    startTimer(1);
     setBackgroundToBreak();
 })
 btnBreak10.addEventListener("click", () => {
     stopTimer();
-    startTimer(10)
+    startTimer(1);
     setBackgroundToBreak();
 
 })
 btnBreak30.addEventListener("click", () => {
     stopTimer();
-    startTimer(30)
+    startTimer(1);
     setBackgroundToBreak();
-
 })
+btnMin.addEventListener("click", (e) => {
+    var window = BrowserWindow.getFocusedWindow();
+    window.minimize();
+});
+
+btnClose.addEventListener("click", (e) => {
+    var window = BrowserWindow.getFocusedWindow();
+    window.close();
+});
+
+
+
 
 //set the current time
 let timeCurrent;
-setTimeCurrent();
+setCurrentTime();
 setBackgroundToIdle();
 
 
 //start the time current interval
-const timeCurrentInterval = setInterval(setTimeCurrent, 1000)
+const currentTimeInterval = setInterval(setCurrentTime, 1000)
 
 //set up the timer 
-let timeTimerInterval
+let timerInterval
 let timeRemaining
 let targetTime
-let timeTimer = new Date();
-timeTimer.setHours(0);
-timeTimer.setMinutes(0);
-timeTimer.setSeconds(0);
 
 
 //tracking paused time
 let timeAtPaused
-
