@@ -30,8 +30,12 @@
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
-          ]
+            "darwin",
+            "linux"
+          ],
+          "config": {
+            "name": "pomodoro-timer"
+          }
         },
         {
           "name": "@electron-forge/maker-deb",
