@@ -68,18 +68,18 @@
 }
 
 .onIdle{
-    background: linear-gradient(-45deg, #FF6200, #FD7F2C, #FD9346, #FDA766);
+    background: linear-gradient(-45deg, #FF6200, #FD7F2C, #FD9346, #ec9653);
     background-size: 500% 500%;
     animation: gradient 7s ease infinite;
   }
 
   .onBreak{
-    background: linear-gradient(-45deg, #2EB62C, #57C84D, #83D475, #ABE098);
+    background: linear-gradient(-45deg, #2EB62C, #57C84D, #83D475, #95e279);
     background-size: 500% 500%;
     animation: gradient 7s ease infinite;
   }
   .onWork{
-    background: linear-gradient(-45deg, #DC1C13, #EA4C46, #F07470, #F1959B);
+    background: linear-gradient(-45deg, #DC1C13, #EA4C46, #F07470, #da757c);
     background-size: 500% 500%;
     animation: gradient 7s ease infinite;
   }

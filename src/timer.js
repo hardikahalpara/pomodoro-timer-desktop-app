@@ -103,7 +103,7 @@ onTimerEnd = (status) => {
     // sound.play();
     notifier.notify({
         title: 'Timer',
-        message: `${status} time up!!`,
+        message: status ? `${status} time up!!` : "Time Up!!",
         icon: __dirname + 'logo.png'
     })
     btnStop.classList.add("hidden");
