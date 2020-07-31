@@ -1,6 +1,6 @@
 # Pomodoro Timer Desktop app
 
-Pomodoro technique is considere 
+A mighty little Desktop timer that reminds you to take a break after 25 mins(changeable) of constant working
 
 ## Installation
 

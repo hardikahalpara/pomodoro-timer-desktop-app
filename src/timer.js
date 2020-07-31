@@ -1,6 +1,5 @@
 const { BrowserWindow } = require('electron').remote;
 const notifier = require('node-notifier');
-const dotenv = require('dotenv')
 const timerElement = document.getElementById("time-timer")
 const currentTimeElement = document.getElementById("time-current")
 const btnStart = document.getElementById("btn-start")
@@ -13,8 +12,9 @@ const background = document.getElementById("background")
 const btnMin = document.getElementById("minimize")
 const btnClose = document.getElementById("close")
 const timerStatus = document.getElementById("timer-status")
+const settings = require('./settings.json')
 
-dotenv.config();
+
 // background updation functions
 const setBackgroundToBreak = () => {
     background.classList.remove("onIdle")
@@ -117,26 +117,29 @@ onTimerEnd = (status) => {
 
 // button click listeners
 btnStart.addEventListener("click", () => {
-    startTimer(parseInt(process.env.WORK_TIME), 'Work')
+    startTimer(settings.WORK_TIME, 'Work')
+    //startTimer(25, 'Work')
 })
 btnStop.addEventListener("click", stopTimer)
 btnPause.addEventListener("click", pauseTimer)
 btnBreakTiny.addEventListener("click", () => {
     stopTimer();
-    startTimer(parseInt(process.env.BREAK_TINY), 'Break');
+    startTimer(settings.BREAK_TINY, 'Break')
+    // startTimer(5, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
-
 })
 btnBreakShort.addEventListener("click", () => {
     stopTimer();
-    startTimer(parseInt(process.env.BREAK_SHORT), 'Break');
+    //startTimer(10, 'Break');
+    startTimer(settings.BREAK_SHORT, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
 btnBreakLong.addEventListener("click", () => {
     stopTimer();
-    startTimer(parseInt(process.env.BREAK_LONG), 'Break');
+    //startTimer(30, 'Break');
+    startTimer(settings.BREAK_LONG, 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
@@ -163,10 +166,10 @@ timerStatus.innerText = "Idle";
 const currentTimeInterval = setInterval(setCurrentTime, 1000)
 
 //setting button labels
-btnBreakTiny.innerText = process.env.BREAK_TINY
-btnBreakShort.innerText = process.env.BREAK_SHORT
-btnBreakLong.innerText = process.env.BREAK_LONG
-btnStart.innerText = `Start (${process.env.WORK_TIME} mins)`
+btnBreakTiny.innerText = settings.BREAK_TINY
+btnBreakShort.innerText = settings.BREAK_SHORT
+btnBreakLong.innerText = settings.BREAK_LONG
+btnStart.innerText = `Start (${settings.WORK_TIME} mins)`
 
 //set up the timer 
 let timerInterval
