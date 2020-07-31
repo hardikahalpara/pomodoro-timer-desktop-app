@@ -1,6 +1,6 @@
-# Foobar
+# Pomodoro Timer Desktop app
 
-Foobar is a Python library for dealing with word pluralization.
+Pomodoro technique is considere 
 
 ## Installation
 

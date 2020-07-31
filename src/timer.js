@@ -1,19 +1,20 @@
 const { BrowserWindow } = require('electron').remote;
 const notifier = require('node-notifier');
+const dotenv = require('dotenv')
 const timerElement = document.getElementById("time-timer")
 const currentTimeElement = document.getElementById("time-current")
 const btnStart = document.getElementById("btn-start")
 const btnStop = document.getElementById("btn-stop")
 const btnPause = document.getElementById("btn-pause")
-const btnBreak5 = document.getElementById("btn-break-5")
-const btnBreak10 = document.getElementById("btn-break-10")
-const btnBreak30 = document.getElementById("btn-break-30")
+const btnBreakTiny = document.getElementById("btn-break-tiny")
+const btnBreakShort = document.getElementById("btn-break-short")
+const btnBreakLong = document.getElementById("btn-break-long")
 const background = document.getElementById("background")
 const btnMin = document.getElementById("minimize")
 const btnClose = document.getElementById("close")
 const timerStatus = document.getElementById("timer-status")
 
-
+dotenv.config();
 // background updation functions
 const setBackgroundToBreak = () => {
     background.classList.remove("onIdle")
@@ -116,26 +117,26 @@ onTimerEnd = (status) => {
 
 // button click listeners
 btnStart.addEventListener("click", () => {
-    startTimer(25, 'Work')
+    startTimer(parseInt(process.env.WORK_TIME), 'Work')
 })
 btnStop.addEventListener("click", stopTimer)
 btnPause.addEventListener("click", pauseTimer)
-btnBreak5.addEventListener("click", () => {
+btnBreakTiny.addEventListener("click", () => {
     stopTimer();
-    startTimer(5, 'Break');
+    startTimer(parseInt(process.env.BREAK_TINY), 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 
 })
-btnBreak10.addEventListener("click", () => {
+btnBreakShort.addEventListener("click", () => {
     stopTimer();
-    startTimer(10, 'Break');
+    startTimer(parseInt(process.env.BREAK_SHORT), 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
-btnBreak30.addEventListener("click", () => {
+btnBreakLong.addEventListener("click", () => {
     stopTimer();
-    startTimer(30, 'Break');
+    startTimer(parseInt(process.env.BREAK_LONG), 'Break');
     setBackgroundToBreak();
     timerStatus.innerText = "Break"
 })
@@ -161,11 +162,16 @@ timerStatus.innerText = "Idle";
 //start the time current interval
 const currentTimeInterval = setInterval(setCurrentTime, 1000)
 
+//setting button labels
+btnBreakTiny.innerText = process.env.BREAK_TINY
+btnBreakShort.innerText = process.env.BREAK_SHORT
+btnBreakLong.innerText = process.env.BREAK_LONG
+btnStart.innerText = `Start (${process.env.WORK_TIME} mins)`
+
 //set up the timer 
 let timerInterval
 let timeRemaining
 let targetTime
-
 
 //tracking paused time
 let timeAtPaused
