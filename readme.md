@@ -34,4 +34,4 @@ or
 npm run make
 ```
 
-5. You can find your modified setup in same directory under out/make/squirrel.windows/. Install it and become productive at your work :)
+5. You can find your reproduced setup in same directory under out/make/squirrel.windows/. Install it and become productive at your work :)
