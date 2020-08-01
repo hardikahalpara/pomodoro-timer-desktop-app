@@ -1,29 +1,37 @@
 # Pomodoro Timer Desktop app
 
-A mighty little Desktop timer that reminds you to take a break after 25 mins(changeable) of constant working
+A mighty little Desktop timer that reminds you to take a break after 25 mins(changeable) of constant working.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+If you're comfortable with classic pomodoro working strategy, you are good to go with the windows executable file (setup), just install it and become productive at your work.
 
+## Changing work and break strategy
+
+1. Clone this repo
 ```bash
-pip install foobar
+git clone https://github.com/hardikahalpara/pomodoro-timer-desktop-app
+```
+or simply download the source code.
+
+2. Navigate to directory and install packages 
+```bash
+yarn
+```
+or 
+```bash
+npm install
 ```
 
-## Usage
+3. Make changes to src/settings.json according to work-break strategy you want.(Value should be in minutes)
 
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+4. Run 
+```bash
+yarn make
+```
+or
+```bash
+npm run make
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+5. You can find your modified setup in same directory under out/make/squirrel.windows/. Install it and become productive at your work :)
